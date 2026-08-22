@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+}
+
+model SiteSetting {
+  id           Int    @id @default(autoincrement())
+  key          String @unique
+  value        String @db.Text
+  updatedAt    DateTime @updatedAt
+}
+
+model Value {
+  id          Int    @id @default(autoincrement())
+  title       String
+  pointA      String
+  pointB      String
+  pointC      String
+  order       Int      @default(0)
+}
+
+model Advantage {
+  id          Int    @id @default(autoincrement())
+  icon        String
+  title       String
+  description String
+  order       Int    @default(0)
+}
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String
+  slug        String    @unique
+  description String?   @db.Text
+  type        String    @default("product") // "product" or "project"
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
+  projects    Project[]
+}
+
+model Product {
+  id            Int      @id @default(autoincrement())
+  slug          String   @unique
+  name          String
+  categoryId    Int?
+  category      Category? @relation(fields: [categoryId], references: [id])
+  description   String   @db.Text
+  specs         String?  @db.Text
+  imageUrl      String
+  gallery       String?  @db.Text
+  datasheetUrl  String?
+  isPublished   Boolean  @default(true)
+  order         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Certificate {
+  id        Int      @id @default(autoincrement())
+  name      String
+  imageUrl  String   // Digunakan untuk file pertama atau URL PDF
+  gallery   String?  @db.Text // Menyimpan array JSON jika banyak gambar
+  fileType  String   @default("image") // "image" atau "pdf"
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Project {
+  id             Int       @id @default(autoincrement())
+  slug           String    @unique
+  name           String
+  location       String
+  capacity       String?
+  description    String?   @db.Text
+  imageUrl       String
+  gallery        String?   @db.Text
+  completionDate DateTime?
+  
+  // New Fields for Enterprise Case Study
+  categoryId     Int?
+  category       Category? @relation(fields: [categoryId], references: [id])
+  contentData    String?   @db.LongText
+  brochureUrl    String?
+
+  isPublished    Boolean   @default(true)
+  order          Int       @default(0)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String   @db.Text
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
