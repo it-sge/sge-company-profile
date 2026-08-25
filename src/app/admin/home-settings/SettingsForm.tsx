@@ -118,7 +118,7 @@ function HeroTab({ initialData }: { initialData: Record<string, string> }) {
         <div className="flex items-center space-x-6">
           {initialData['hero_image'] && (
             <div className="relative w-32 h-20 rounded-lg overflow-hidden border border-white/[0.08] shadow-sm">
-              <Image src={initialData['hero_image']} alt="Hero bg" fill className="object-cover" />
+              <Image src={initialData['hero_image']} alt="Hero bg" fill className="object-cover" unoptimized={typeof initialData['hero_image'] === 'string' && initialData['hero_image'].startsWith('/uploads')} />
             </div>
           )}
           <div className="flex-1">
@@ -274,7 +274,7 @@ function SolarSystemTab({ initialData }: { initialData: Record<string, string> }
         <div className="flex items-center space-x-6">
           {initialData['solar_system_image'] && (
             <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-navy shadow-sm">
-              <Image src={initialData['solar_system_image']} alt="Solar bg" fill className="object-cover" />
+              <Image src={initialData['solar_system_image']} alt="Solar bg" fill className="object-cover" unoptimized={typeof initialData['solar_system_image'] === 'string' && initialData['solar_system_image'].startsWith('/uploads')} />
             </div>
           )}
           <div className="flex-1">

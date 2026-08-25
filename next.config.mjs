@@ -24,6 +24,16 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  async rewrites() {
+    return {
+      fallback: [
+        {
+          source: '/uploads/:path*',
+          destination: '/api/local-files?path=/uploads/:path*',
+        },
+      ],
+    };
+  },
 };
 
 export default nextConfig;

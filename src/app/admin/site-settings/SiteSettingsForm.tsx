@@ -121,7 +121,7 @@ export default function SiteSettingsForm({ settings }: SiteSettingsFormProps) {
             <label className="block text-sm font-medium text-white/70 mb-2">Navigation Banner Image</label>
             <div className="flex flex-col md:flex-row gap-6 items-start">
               <div className="w-full md:w-64 h-40 bg-navy border border-white/10 rounded-xl overflow-hidden relative flex-shrink-0">
-                <Image src={previewNavImage} alt="Nav Preview" fill className="object-cover" />
+                <Image src={previewNavImage} alt="Nav Preview" fill className="object-cover" unoptimized={typeof previewNavImage === 'string' && previewNavImage.startsWith('/uploads')} />
               </div>
               <div className="flex-grow space-y-4 w-full">
                 <div>

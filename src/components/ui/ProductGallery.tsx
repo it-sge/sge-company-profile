@@ -55,6 +55,7 @@ export default function ProductGallery({ mainImage, galleryImages = [], productN
                 fill 
                 className="object-contain p-2"
                 sizes="(max-width: 768px) 25vw, 15vw"
+                unoptimized={typeof img === 'string' && img.startsWith('/uploads')}
               />
             </button>
           ))}

@@ -40,7 +40,7 @@ export default async function AdminProjectsPage() {
                   <td className="px-5 py-3.5 whitespace-nowrap">
                     <div className="h-10 w-16 rounded-lg overflow-hidden bg-white/[0.06] relative border border-white/[0.06]">
                       {project.imageUrl ? (
-                        <Image src={project.imageUrl} alt={project.name} fill className="object-cover" />
+                        <Image src={project.imageUrl} alt={project.name} fill className="object-cover" unoptimized={typeof project.imageUrl === 'string' && project.imageUrl.startsWith('/uploads')} />
                       ) : (
                         <div className="flex items-center justify-center h-full text-xs text-white/20">—</div>
                       )}

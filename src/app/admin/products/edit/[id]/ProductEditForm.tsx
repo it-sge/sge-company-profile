@@ -205,7 +205,7 @@ export default function ProductEditForm({ product }: { product: any }) {
             <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-3">Gambar Utama</label>
             {mainImage ? (
               <div className="relative w-40 h-40 rounded-xl overflow-hidden border-2 border-white/10 group mb-3 bg-white/5">
-                <Image src={mainImage} alt="Main" fill className="object-contain p-2" />
+                <Image src={mainImage} alt="Main" fill className="object-contain p-2" unoptimized={typeof mainImage === 'string' && mainImage.startsWith('/uploads')} />
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <button 
                     type="button"
@@ -242,7 +242,7 @@ export default function ProductEditForm({ product }: { product: any }) {
                 <div className="flex flex-wrap gap-4">
                   {gallery.map((imgUrl, idx) => (
                     <div key={idx} className="relative w-24 h-24 rounded-lg overflow-hidden border border-white/10 group bg-white/5">
-                      <Image src={imgUrl} alt={`Gallery ${idx}`} fill className="object-contain p-1" />
+                      <Image src={imgUrl} alt={`Gallery ${idx}`} fill className="object-contain p-1" unoptimized={typeof imgUrl === 'string' && imgUrl.startsWith('/uploads')} />
                       <button 
                         type="button"
                         onClick={() => setItemToDelete({ type: 'galleryImage', index: idx })}

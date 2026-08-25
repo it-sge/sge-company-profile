@@ -61,6 +61,7 @@ export default function LightboxImage({ src, alt, className = "", imageClassName
             sizes="100vw"
             className="object-contain"
             loading="lazy"
+            unoptimized={typeof src === 'string' && src.startsWith('/uploads')}
           />
         </div>
       </div>
@@ -85,6 +86,7 @@ export default function LightboxImage({ src, alt, className = "", imageClassName
             transformOrigin,
             objectFit: imageClassName.includes('object-cover') ? 'cover' : 'contain'
           }}
+          unoptimized={typeof src === 'string' && src.startsWith('/uploads')}
         />
         
         {/* Mobile Lightbox Overlay Icon */}

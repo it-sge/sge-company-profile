@@ -42,7 +42,7 @@ export default async function AdminProductsPage() {
                     <div className="flex items-center space-x-2">
                       <div className="h-10 w-10 rounded-lg overflow-hidden bg-white/[0.06] relative border border-white/[0.06] shrink-0">
                         {product.imageUrl ? (
-                          <Image src={product.imageUrl} alt={product.name} fill className="object-cover" />
+                          <Image src={product.imageUrl} alt={product.name} fill className="object-cover" unoptimized={typeof product.imageUrl === 'string' && product.imageUrl.startsWith('/uploads')} />
                         ) : (
                           <div className="flex items-center justify-center h-full text-xs text-white/20">—</div>
                         )}
