@@ -14,22 +14,28 @@ model User {
   name      String
   role      String   @default("admin")
   createdAt DateTime @default(now())
+
+  @@map("user")
 }
 
 model SiteSetting {
-  id           Int    @id @default(autoincrement())
-  key          String @unique
-  value        String @db.Text
-  updatedAt    DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+
+  @@map("sitesetting")
 }
 
 model Value {
-  id          Int    @id @default(autoincrement())
-  title       String
-  pointA      String
-  pointB      String
-  pointC      String
-  order       Int      @default(0)
+  id     Int    @id @default(autoincrement())
+  title  String
+  pointA String
+  pointB String
+  pointC String
+  order  Int    @default(0)
+
+  @@map("value")
 }
 
 model Advantage {
@@ -38,6 +44,8 @@ model Advantage {
   title       String
   description String
   order       Int    @default(0)
+
+  @@map("advantage")
 }
 
 model Category {
@@ -50,23 +58,27 @@ model Category {
   updatedAt   DateTime  @updatedAt
   products    Product[]
   projects    Project[]
+
+  @@map("category")
 }
 
 model Product {
-  id            Int      @id @default(autoincrement())
-  slug          String   @unique
-  name          String
-  categoryId    Int?
-  category      Category? @relation(fields: [categoryId], references: [id])
-  description   String   @db.Text
-  specs         String?  @db.Text
-  imageUrl      String
-  gallery       String?  @db.Text
-  datasheetUrl  String?
-  isPublished   Boolean  @default(true)
-  order         Int      @default(0)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id           Int       @id @default(autoincrement())
+  slug         String    @unique
+  name         String
+  categoryId   Int?
+  category     Category? @relation(fields: [categoryId], references: [id])
+  description  String    @db.Text
+  specs        String?   @db.Text
+  imageUrl     String
+  gallery      String?   @db.Text
+  datasheetUrl String?
+  isPublished  Boolean   @default(true)
+  order        Int       @default(0)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@map("product")
 }
 
 model Certificate {
@@ -77,6 +89,8 @@ model Certificate {
   fileType  String   @default("image") // "image" atau "pdf"
   order     Int      @default(0)
   createdAt DateTime @default(now())
+
+  @@map("certificate")
 }
 
 model Project {
@@ -89,17 +103,18 @@ model Project {
   imageUrl       String
   gallery        String?   @db.Text
   completionDate DateTime?
-  
+
   // New Fields for Enterprise Case Study
   categoryId     Int?
   category       Category? @relation(fields: [categoryId], references: [id])
   contentData    String?   @db.LongText
   brochureUrl    String?
-
   isPublished    Boolean   @default(true)
   order          Int       @default(0)
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
+
+  @@map("project")
 }
 
 model Message {
@@ -111,4 +126,6 @@ model Message {
   message   String   @db.Text
   isRead    Boolean  @default(false)
   createdAt DateTime @default(now())
+
+  @@map("message")
 }
